@@ -1,5 +1,5 @@
 "use client";
-import { LogoutUser } from "@/common/api";
+import { LogoutUser, isUserAuthenticated } from "@/common/api";
 import { Button } from "@/components/ui/button";
 import { useGetCurrentUser } from "@/hooks/auth/get-currentuser";
 import React from "react";

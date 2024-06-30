@@ -35,7 +35,7 @@ import { isUserAuthenticated } from "@/common/api";
 function SignupForm() {
   const router = useRouter();
   if (isUserAuthenticated()) {
-    router.push("/profile");
+    router.push("/");
   }
   const handleSignUp = UseHandleSignUpUser();
   const form = useForm<z.infer<typeof authSchema>>({
@@ -97,12 +97,16 @@ function SignupForm() {
                 )}
               />
               <Button type="submit" className="w-full">
-                Login
+                Signup
               </Button>
             </form>
           </Form>
         </CardContent>
-        <CardFooter></CardFooter>
+        <CardFooter className="flex justify-center">
+          <Link href="/login" className="text-center text-sky-600">
+            Already have an Account? Login
+          </Link>
+        </CardFooter>
       </Card>
     </div>
   );

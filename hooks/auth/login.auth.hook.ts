@@ -19,7 +19,7 @@ export const useHandleLogin = () => {
       .then((data) => {
         Cookies.set("Authentication", data.token);
         toast.success("User loggedIn successfully");
-        router.push("/profile");
+        router.push("/");
       })
       .catch((err) => {
         console.log(err);

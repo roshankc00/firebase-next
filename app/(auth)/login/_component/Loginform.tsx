@@ -43,7 +43,7 @@ function LoginForm() {
   const router = useRouter();
   const handleLogin = useHandleLogin();
   if (isUserAuthenticated()) {
-    router.push("/profile");
+    router.push("/");
   }
 
   const form = useForm<z.infer<typeof authSchema>>({
@@ -76,7 +76,7 @@ function LoginForm() {
           localId: user?.uid,
         });
         Cookies.set("Authentication", data.token);
-        router.push("/profile");
+        router.push("/");
       }
     });
   });
@@ -133,8 +133,23 @@ function LoginForm() {
             </form>
           </Form>
         </CardContent>
-        <CardFooter>
-          <Button onClick={handleSignUpWithGoogle}> Sign with Google</Button>
+        <CardFooter className="flex flex-col gap-5">
+          <Button
+            type="button"
+            onClick={() => handleSignUpWithGoogle()}
+            className="flex gap-5 items-center w-full "
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+              alt=""
+            />{" "}
+            Login With Google
+          </Button>
+          <div>
+            <Link href="/signup" className="text-center text-sky-600">
+              Not Registered ? Create an account
+            </Link>
+          </div>
         </CardFooter>
       </Card>
     </div>
