@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 
 type JWTUser = {
   uid: string;
@@ -8,15 +8,25 @@ type JWTUser = {
 
 class JwtService {
   public static generateTokenForUser(user: JWTUser) {
-    const token = jwt.sign(user, process.env.NEXT_PUBLIC_JWT_SECRET as string);
-    return token;
+    const iat = Math.floor(Date.now() / 1000);
+    const exp = iat + 60 * 60; // one hour
+
+    return new SignJWT(user)
+      .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+      .setExpirationTime(exp)
+      .setIssuedAt(iat)
+      .setNotBefore(iat)
+      .sign(
+        new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET as string)
+      );
   }
 
-  public static decodeToken(token: string) {
-    return jwt.verify(
+  public static async decodeToken(token: string) {
+    const { payload } = await jwtVerify(
       token,
-      process.env.NEXT_PUBLIC_JWT_SECRET as string
-    ) as JWTUser;
+      new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET as string)
+    );
+    return payload;
   }
 }
 

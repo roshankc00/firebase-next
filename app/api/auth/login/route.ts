@@ -11,15 +11,15 @@ export async function POST(req: any) {
     const body = await req.json();
     const { email, password } = authSchema.parse(body);
     const user = await signInWithEmailAndPassword(auth, email, password);
-    const token = JwtService.generateTokenForUser({
+    const token = await JwtService.generateTokenForUser({
       uid: user?.user?.uid,
       email: user?.user?.email || "",
     });
+    console.log(token, "wowowow");
     return NextResponse.json({
       token,
     });
   } catch (error: any) {
-    console.log(error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { message: "Provide the valid field", success: false },

@@ -5,20 +5,13 @@ import jwt from "jsonwebtoken";
 import { headers } from "next/headers";
 import JwtService from "@/helpers/token/token.service";
 
-export async function GET(req: Request) {
+export async function GET(req: any) {
   try {
     const headersList = headers();
     const authorization = headersList.get("authorization")?.split(" ")[1];
     if (authorization) {
-      const user = JwtService.decodeToken(authorization);
-      if (!user) {
-        return NextResponse.json(
-          { message: "Unauthorized", success: false },
-          { status: 401 }
-        );
-      } else {
-        return NextResponse.json({ user, success: true }, { status: 200 });
-      }
+      const user = await JwtService.decodeToken(authorization);
+      return NextResponse.json({ user, success: true }, { status: 200 });
     } else {
       return NextResponse.json(
         { message: "token Expired", success: false },
