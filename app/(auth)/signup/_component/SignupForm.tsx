@@ -30,9 +30,13 @@ import toast from "react-hot-toast";
 import { authSchema } from "@/helpers/validation/auth.validation";
 import { useHandleLogin } from "@/hooks/auth/login.auth.hook";
 import { UseHandleSignUpUser } from "@/hooks/auth/signup.auth.hook";
+import { isUserAuthenticated } from "@/common/api";
 
 function SignupForm() {
   const router = useRouter();
+  if (isUserAuthenticated()) {
+    router.push("/profile");
+  }
   const handleSignUp = UseHandleSignUpUser();
   const form = useForm<z.infer<typeof authSchema>>({
     resolver: zodResolver(authSchema),
