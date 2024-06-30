@@ -6,6 +6,7 @@ import React from "react";
 
 const Profile = () => {
   const { data, isFetching, isLoading } = useGetCurrentUser();
+  console.log(data);
   return (
     <div className="flex justify-center items-center flex-col">
       <h1 className=" font-semibold text-xl">

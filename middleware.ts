@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import JwtService from "./helpers/token/token.service";
 
 export function middleware(req: NextRequest) {
   const authorizationHeader = req.headers.get("authorization");
@@ -11,18 +10,8 @@ export function middleware(req: NextRequest) {
       },
     });
   }
-
-  if (!authorizationHeader.startsWith("Bearer ")) {
-    return new Response("Unauthorized", { status: 401 });
-  }
-
   const token = authorizationHeader.slice("Bearer ".length);
-  try {
-    const payload = JwtService.decodeToken(token);
-    if (!payload) {
-      return new Response("Unauthorized", { status: 401 });
-    }
-  } catch (error) {
+  if (!authorizationHeader.startsWith("Bearer ") && !token) {
     return new Response("Unauthorized", { status: 401 });
   }
 
@@ -30,5 +19,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/auth/me"], // Only apply to /api/auth/me endpoint
+  matcher: ["/api/auth/me"],
 };

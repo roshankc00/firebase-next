@@ -11,7 +11,14 @@ export async function GET(req: Request) {
     const authorization = headersList.get("authorization")?.split(" ")[1];
     if (authorization) {
       const user = JwtService.decodeToken(authorization);
-      return NextResponse.json({ user, success: true }, { status: 200 });
+      if (!user) {
+        return NextResponse.json(
+          { message: "Unauthorized", success: false },
+          { status: 401 }
+        );
+      } else {
+        return NextResponse.json({ user, success: true }, { status: 200 });
+      }
     } else {
       return NextResponse.json(
         { message: "token Expired", success: false },
