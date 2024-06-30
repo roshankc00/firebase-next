@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -23,12 +22,9 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import { authSchema } from "@/helpers/validation/auth.validation";
-import { useHandleLogin } from "@/hooks/auth/login.auth.hook";
 import { UseHandleSignUpUser } from "@/hooks/auth/signup.auth.hook";
 import { isUserAuthenticated } from "@/common/api";
 

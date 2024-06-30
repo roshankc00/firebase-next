@@ -5,7 +5,6 @@ import { z } from "zod";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -13,7 +12,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,11 +21,9 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import { authSchema } from "@/helpers/validation/auth.validation";
 import { useHandleLogin } from "@/hooks/auth/login.auth.hook";
 import {
