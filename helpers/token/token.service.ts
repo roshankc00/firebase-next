@@ -9,7 +9,7 @@ type JWTUser = {
 class JwtService {
   public static generateTokenForUser(user: JWTUser) {
     const iat = Math.floor(Date.now() / 1000);
-    const exp = iat + 60 * 60; // one hour
+    const exp = iat + 60 * 60 * 24 * 7; //  7 day
 
     return new SignJWT(user)
       .setProtectedHeader({ alg: "HS256", typ: "JWT" })
