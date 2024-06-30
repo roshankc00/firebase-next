@@ -22,7 +22,6 @@ export const useHandleLogin = () => {
         router.push("/");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Unable to login a user");
       });
   };

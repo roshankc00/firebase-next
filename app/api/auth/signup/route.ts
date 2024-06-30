@@ -9,7 +9,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, password } = authSchema.parse(body);
     const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
     return NextResponse.json({
       message: "User created successfully",
       success: true,

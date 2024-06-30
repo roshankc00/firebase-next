@@ -10,7 +10,7 @@ export async function POST(req: any) {
   try {
     const body = await req.json();
     const { email, localId, name } = googleSchema.parse(body);
-    const token = JwtService.generateTokenForUser({
+    const token = await JwtService.generateTokenForUser({
       uid: localId,
       email: email,
       displayname: name,
@@ -19,7 +19,6 @@ export async function POST(req: any) {
       token,
     });
   } catch (error: any) {
-    console.log(error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { message: "Provide the valid field", success: false },

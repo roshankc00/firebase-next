@@ -15,7 +15,6 @@ export async function POST(req: any) {
       uid: user?.user?.uid,
       email: user?.user?.email || "",
     });
-    console.log(token, "wowowow");
     return NextResponse.json({
       token,
     });

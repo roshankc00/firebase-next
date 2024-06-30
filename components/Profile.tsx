@@ -6,13 +6,16 @@ import React from "react";
 
 const Profile = () => {
   const { data, isFetching, isLoading } = useGetCurrentUser();
-  console.log(data);
   return (
     <div className="flex justify-center items-center flex-col">
-      <h1 className=" font-semibold text-xl">
-        {!isFetching && !isLoading && <div>Hello {data?.user?.email}</div>}
-      </h1>
-      <Button onClick={() => LogoutUser()}> LogOut</Button>
+      {!isFetching && !isLoading && (
+        <>
+          <h1 className=" font-semibold text-xl">
+            {<div>Hello {data?.user?.email}</div>}
+          </h1>
+          <Button onClick={() => LogoutUser()}> LogOut</Button>
+        </>
+      )}
     </div>
   );
 };
