@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email, password } = authSchema.parse(body);

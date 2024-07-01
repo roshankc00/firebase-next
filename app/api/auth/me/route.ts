@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { headers } from "next/headers";
 import JwtService from "@/helpers/token/token.service";
 
-export async function GET(req: any) {
+export async function GET(req: Request) {
   try {
     const headersList = headers();
     const authorization = headersList.get("authorization")?.split(" ")[1];
